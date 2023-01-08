@@ -17,7 +17,7 @@ const FormikPersist = ({
   exclude,
   encode,
   decode,
-}: FormikPersistProps) => {
+}: FormikPersistProps): null => {
   const { values, setValues } = useFormikContext<FormikValues>();
   const storage = session ? sessionStorage : localStorage;
 
