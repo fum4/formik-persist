@@ -1,10 +1,9 @@
-import { useRef, useLayoutEffect } from 'react';
 import { type FormikValues, useFormikContext } from 'formik';
 import usePersist, { PersistOptions } from '@nw/use-persist';
 
 export interface FormikPersistProps extends Pick<
   PersistOptions,
-  'key' | 'setToStorage' | 'getFromStorage' | 'encode' | 'decode'
+  'key' | 'setToStorage' | 'getFromStorage' | 'include' | 'exclude' | 'encode' | 'decode'
 >{
   session?: boolean;
 }
@@ -14,23 +13,22 @@ const FormikPersist = ({
   session = false,
   setToStorage,
   getFromStorage,
+  include,
+  exclude,
   encode,
-  decode
+  decode,
 }: FormikPersistProps) => {
   const { values, setValues } = useFormikContext<FormikValues>();
-  const setValuesRef = useRef(setValues);
   const storage = session ? sessionStorage : localStorage;
-
-  useLayoutEffect(() => {
-    setValuesRef.current = setValues;
-  });
 
   usePersist({
     key,
     values,
-    setValues: setValuesRef.current,
+    setValues,
     setToStorage: setToStorage || storage.setItem,
     getFromStorage: getFromStorage || storage.getItem,
+    include,
+    exclude,
     encode,
     decode,
   })

@@ -1,5 +1,5 @@
 {
-  "name": "formik-persist",
+  "name": "@nw/formik-persist",
   "version": "0.0.1",
   "description": "Persist Formik values with ease",
   "main": "lib/index.js",
