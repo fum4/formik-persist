@@ -1,0 +1,17 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "target": "es5",
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
+    "outDir": "lib",
+    "jsx": "react",
+    "allowJs": true,
+    "esModuleInterop": true,
+  },
+  "include": [ "src/**/*" ],
+  "exclude": [ "node_modules" ]
+}

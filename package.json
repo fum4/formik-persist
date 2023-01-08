@@ -1,0 +1,41 @@
+{
+  "name": "formik-persist",
+  "version": "0.0.1",
+  "description": "Persist Formik values",
+  "main": "lib/index.js",
+  "module": "lib/index.js",
+  "scripts": {
+    "build": "rm -rf lib && NODE_ENV=production tsc",
+    "release": "release-it"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nomadware-io/formik-persist.git"
+  },
+  "keywords": [
+    "react",
+    "navigate",
+    "history",
+    "away",
+    "block"
+  ],
+  "author": "fum4",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/nomadware-io/formik-persist/issues"
+  },
+  "homepage": "https://github.com/nomadware-io/formik-persist#readme",
+  "peerDependencies": {
+    "react": "^18.0.0",
+    "formik": "^2.0.0"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.18.9",
+    "@babel/core": "^7.18.9",
+    "@babel/preset-env": "^7.18.9",
+    "@babel/preset-react": "^7.18.6",
+    "@tsconfig/recommended": "^1.0.1",
+    "release-it": "^15.5.1",
+    "typescript": "^4.7.4"
+  }
+}
