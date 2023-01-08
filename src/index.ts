@@ -1,12 +1,22 @@
-import { useRef, useEffect, useLayoutEffect } from 'react';
+import { useRef, useLayoutEffect } from 'react';
 import { type FormikValues, useFormikContext } from 'formik';
+import usePersist, { PersistOptions } from '@nw/use-persist';
 
-export interface FormikPersistProps {
-  initialValues: FormikValues;
+export interface FormikPersistProps extends Pick<
+  PersistOptions,
+  'key' | 'setToStorage' | 'getFromStorage' | 'encode' | 'decode'
+>{
   session?: boolean;
 }
 
-const FormikPersist = ({ initialValues, session = false }: FormikPersistProps) => {
+const FormikPersist = ({
+  key = 'formikPersist',
+  session = false,
+  setToStorage,
+  getFromStorage,
+  encode,
+  decode
+}: FormikPersistProps) => {
   const { values, setValues } = useFormikContext<FormikValues>();
   const setValuesRef = useRef(setValues);
   const storage = session ? sessionStorage : localStorage;
@@ -15,23 +25,15 @@ const FormikPersist = ({ initialValues, session = false }: FormikPersistProps) =
     setValuesRef.current = setValues;
   });
 
-  useEffect(() => {
-    const persisted = storage.getItem('formikPersist');
-
-    if (persisted) {
-      const persistedValues = JSON.parse(persisted);
-
-      if (persistedValues) {
-        setValuesRef.current?.(persistedValues);
-      }
-    }
-  }, [ storage ]);
-
-  useEffect(() => {
-    if (values !== initialValues) {
-      storage.setItem('formikPersist', JSON.stringify(values));
-    }
-  }, [ values, initialValues, storage ]);
+  usePersist({
+    key,
+    values,
+    setValues: setValuesRef.current,
+    setToStorage: setToStorage || storage.setItem,
+    getFromStorage: getFromStorage || storage.getItem,
+    encode,
+    decode,
+  })
 
   return null;
 };
