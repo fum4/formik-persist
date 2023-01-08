@@ -31,9 +31,10 @@ const FormikPersist = ({
     exclude,
     encode,
     decode,
-  })
+  });
 
   return null;
 };
 
+export type PersistProps = FormikPersistProps;
 export default FormikPersist;
